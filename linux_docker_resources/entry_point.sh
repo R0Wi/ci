@@ -21,7 +21,7 @@ ifconfig eth0 multicast
 echo "done."
 
 # We only attempt to install Connext on amd64
-if [ "${ARCH}" != "aarch64" ]; then
+if [ "${ARCH}" = "FALSE..." ]; then
     # extract all ignored rmws
     # extract args between --ignore-rmw until the first appearance of '-'
     IGNORE_CONNEXTDDS=`echo ${CI_ARGS} | sed -e 's/.*ignore-rmw \([^-]*\).*/\1/' | sed -e 's/-.*//' | grep rmw_connextdds`
