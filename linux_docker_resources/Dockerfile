@@ -79,6 +79,13 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   uncrustify \
   yamllint
 
+# TODO :: REMOVE !!!!!!!!!!!!!!!!!!!!!!!
+ENV REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+ENV NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+ADD http://host.docker.internal:8888/KSTG_Root_CA.crt /usr/local/share/ca-certificates
+RUN update-ca-certificates && \
+    git config --global http.sslCAinfo $REQUESTS_CA_BUNDLE
+
 # Install clang if build arg is true
 RUN if test ${COMPILE_WITH_CLANG} = true; then apt-get update && apt-get install --no-install-recommends -y clang libc++-dev libc++abi-dev; fi
 
